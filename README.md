@@ -1,3 +1,22 @@
+# REACT APP BOILERPLATE
+
+Hi there,
+
+So you came here after all! Nice :)
+
+What is this repo? Well this is just my current BoilerPlate for any react based app with some level of complexity. 
+
+## How to install
+
+Just clone the repo, run " npm i ", and "npm start". That's it, the app is up. 
+
+## What you get
+
+ - Redux and React-Redux, already setup, with Immer for easy state updates. A store is already set and provided to the APP
+ - React-Router V6, with a <BrowserRouter> already created and wrapped around the app. Files for routes definitions already exist.
+ - A <PageContent> component used to wrap any content with a header and a footer (Those two are already created too.)
+ - A custom HOOK you can use, based on fetch, able to retrieve data from an API.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
