@@ -1,0 +1,263 @@
+@keyframes grow {
+    0% {
+        width: 0px;
+    }
+    100% {
+        width:3vw;
+    }
+}
+
+@keyframes shrink {
+    0% {
+        width: 20%;
+    }
+    50% {
+        width:0%;
+    }
+    100% {
+        width:20%;
+    }
+}
+
+.todo {
+    width: 60%;
+    height: 100%;
+    padding: 2vw;
+    box-sizing:border-box;
+    font-weight: bold;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-content: center;
+    align-items:center;
+    font-size: 2vw;
+    
+    &__completion-message {
+        width:100%;
+        padding: 1vw;
+        box-sizing:border-box;
+        border-radius: 0.4vw;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.329);
+        border: 1px solid rgb(255, 255, 255);
+        color:rgb(255, 255, 255);
+        font-size: 2vw;
+    };
+
+   
+    &__icon {
+        width: 15%;
+        margin: 0 5%;
+        height: 4vw;
+        font-size: 3vw;
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        justify-content:center;
+        color: white;
+        margin-bottom: 2vw;
+    }
+
+    &__tasks {
+        display:flex;
+        width: 100%;
+        height: 40%;
+        flex-direction:row;
+        align-items:flex-start;
+        align-content:flex-start;
+        justify-content:space-evenly;
+        box-sizing:border-box;
+        flex-wrap:wrap;
+    }
+
+    &__task-details {
+        width: 30%;
+        padding: 0 2vw;
+        height: 100%;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+        box-sizing: border-box;
+
+        &__submit-description {
+            width: 3vw;
+            height:3vw;
+            position: relative;
+            top: -26vw;
+            left:-1.5vw;
+            font-size: 2vw;
+            border-radius: 50%;
+        }
+       
+        &__title {
+            min-width: 100%;
+            height: 4vw;
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            justify-content:flex-start;
+            font-weight: bold;
+            font-size: 2vw;
+            color: white;
+            border-bottom: 0.1vw solid white;
+            margin: 0.5vw 0 2.5vw 0 ;
+            font-size: 1.5vw;
+        }
+        &__description {
+            background-color: rgba(255, 255, 255, 0.198);
+            margin-top: 4vw;
+            height: 50%;
+            border-radius: 0.2vw;
+            font-size: 2vw;
+            padding: 2vw;
+            box-sizing:border-box;
+            font-family: "Dancing Script";
+            width: 100%;
+            color:white;
+        }
+        &__information-container {
+            width: 49%;
+            display:flex;
+            box-sizing:border-box;
+            flex-direction:row;
+            align-items:center;
+            justify-content:space-between;
+            background-color:rgba(255, 255, 255, 0.623);
+            border-radius: 0.5vw;
+            margin-right: 1%;
+
+            padding-right: 0.5vw;
+            
+        }
+        &__deadline {
+            height:8vw;
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            justify-content:center;
+            font-weight: bold;
+            width: max-content;
+        }
+        &__status {
+            height: 10vh;
+            font-size: 2vw;
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            justify-content:center;
+            height:3vw;
+            width: 7vw;
+            
+        }
+        &__labels {
+            width: max-content;
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            justify-content:center;
+            background-color:rgb(80, 149, 214);
+            height:4vw;
+            width: 6vw;
+            border-radius: 0.5vw;
+            color:white;
+            margin-right:  1vw;
+            font-size: 1.5vw;
+        }
+    }
+    
+    &__task {
+        display:flex;
+        flex-direction:row;
+        height: 3vw;
+        width: max-content;
+        border-radius: 0.3vw;
+        margin-top: 1vw;
+        margin-left: 2vw;
+        background: rgba(255, 255, 255, 0.329);
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        justify-content:flex-start;
+
+        &:hover {
+            background-color:rgba(255, 255, 255, 0.507)
+        }
+        &--open {
+            color: rgb(255, 255, 255);
+            &:nth-child(odd) {
+                color:rgb(255, 255, 255);
+            }
+        }
+        &--close {
+            color:rgb(255, 196, 0);
+            opacity:0.9;
+            filter: grayscale(20%);
+        }
+
+        &__delete-icon {
+            width: 1.2vw;
+            height: 1.2vw;    
+            color: rgb(80, 149, 214);
+            position:relative;
+            left: -0.6vw;
+            font-size:1.3vw;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            box-sizing:border-box;
+            background-color:white;
+            border-radius: 1vw;
+            &:hover {
+                color: red;
+            }
+        }
+    
+        &__status {
+            height:100%;
+            width:3vw;
+            font-size: 1vw;
+            line-height: 1vw;
+            box-sizing:border-box;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius: 0.3vw;
+            opacity: 0.6;
+            &--open {
+                background-color: rgba(204, 0, 255, 0.65);
+                & > i {
+                    color:white;
+                }
+                /*animation: 200ms ease-in forwards grow;*/
+            }
+            &--close {
+                background-color: rgba(153, 233, 153, 0.507);
+                /*animation: 200ms ease-in forwards grow;*/
+            }
+
+        }
+        &__title {
+            width: max-content;
+            white-space:nowrap;
+            margin-right: 2vw;
+            
+        }
+        
+    }
+    &__title-input {
+        width: 30%;
+        font-size: 1.5vw;
+        margin-bottom: 1vw;
+        margin-right: 3Vw;
+    }
+    &__add-button {
+        width: 30%;
+        font-size: 1.5vw;
+        margin-bottom: 1vw;
+        font-family: "Dancing Script";
+    }
+}
