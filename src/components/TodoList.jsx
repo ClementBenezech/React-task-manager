@@ -3,10 +3,12 @@ import { useState, useRef } from "react"
 import React from "react"
 import '../styles/todo.scss'
 import { useEffect } from "react"
-import format from "date-fns/format"
-import { compareAsc } from "date-fns"
+import { getTaskStyle } from "../utils/getTaskStyle"
+import TodoTask from "./TodoTask"
+import { getNumberOfTasksForStatus } from "../utils/getNumberOfTasksForStatus"
 
 const TodoList = () => {
+
 
     const inputRef = useRef()
     const dispatch = useDispatch()
@@ -14,39 +16,17 @@ const TodoList = () => {
     const taskList = useSelector(state => state.todoTasksList)
     const [hasBeenAdded, setHasBeenAdded] = useState(false)
 
-    const getTaskStyle = (task) => {
-
-        const statusIcons = [{status: "open", icon: "far fa-clock", color: '#9000fc'}, {status: "close", icon: "far fa-check-circle", color: 'green'}  ]
-
-        const deadlineIsExpired = compareAsc(new Date((format(Date.now(), 'MM/dd/yyyy'))), new Date(task.deadline))
-        
-        if (deadlineIsExpired === 1 && task.status === 'close') {
-            return statusIcons.filter(icon => icon.status === task.status)[0]
-        } else if (deadlineIsExpired === 1 && task.status === 'open')  {
-            return {icon: "fas fa-fire", color: "red"}
-        } else {
-            return statusIcons.filter(icon => icon.status === task.status)[0]
-        }
-    }
+    const openCountRef = useRef()
+    const closeCountRef = useRef()
+    const lateCountRef = useRef()
 
     const tasksReactElement = taskList.map(task => {
         return( 
-        <div className = {'todo__task todo__task--'+task.status} key = {task.id} id = {task.id} onClick={(e) => {
-                        dispatch({type: 'todo/selectTask', payload: e.target.id})}} >
-                        <i title = {task.id} className="fas fa-minus-circle todo__task__delete-icon" onClick = {(e) => {
-                            e.stopPropagation();
-                            dispatch({type: 'todo/deleteTask', payload: e.target.title})
-
-                        }}></i>
-                        <div id = {task.id+"_title"} className = "todo__task__title"  >{task.title}</div>
-                        <div id = {task.id+"_status"} className = {'todo__task__status todo__task__status--'+task.status} style = {{'background-color': getTaskStyle(task).color}} onClick = {(e)=> {
-                        dispatch({type: 'todo/toggleTaskStatus', payload: taskList.findIndex(task => task.id === parseInt(e.target.id))})
-                        }}>
-                            <i id = {task.id} className={getTaskStyle(task).icon} ></i>
-                        </div>
-        </div>
+            <TodoTask key = {task.id} task = {task}/>
         )
     })
+
+
 
     const handleSubmit = () => {
         if (taskInputValue !== '') {
@@ -65,13 +45,15 @@ const TodoList = () => {
         }
     }, [hasBeenAdded])
 
+    useEffect(() => {
+        openCountRef.current.className = "todo__count-by-status__count";
+    }, )
+
     return (
         <div className = "todo">
-            <i className="fas fa-clipboard-list todo__icon"></i>
-            <i className="fas fa-arrow-right todo__icon"></i>
-            <i className="far fa-save todo__icon"></i>
-                <input className = "todo__title-input" ref = {inputRef} onChange = {(e) => {
-                    setTaskInputValue(e.target.value)
+            
+                <input maxLength="32" className = "todo__title-input" ref = {inputRef} onChange = {(e) => {
+                        setTaskInputValue(e.target.value)
                 }} 
 
                 onKeyDown= {(e)=> {
@@ -79,7 +61,12 @@ const TodoList = () => {
                         handleSubmit()
                     }
                 }}
+
                 placeholder="Enter task name here"></input>
+
+                <i className="fas fa-clipboard-list todo__icon"></i>
+                <i className="fas fa-arrow-right todo__icon"></i>
+                <i className="far fa-save todo__icon"></i>
 
                 <button className = "todo__add-button" onClick = {(e)=> {
                     handleSubmit()
@@ -88,6 +75,22 @@ const TodoList = () => {
                     {tasksReactElement}
                 </div>
                 
+                <div className="todo__count-by-status__container">
+                    <div className="todo__count-by-status">
+                        <i className="far fa-clock todo__count-by-status__icon" style ={{"color": 'violet'}}></i>
+                        <div ref = {openCountRef} key = {'open'+getNumberOfTasksForStatus('open', taskList)} className="todo__count-by-status__count">{getNumberOfTasksForStatus('open', taskList)}</div>
+                    </div>
+
+                    <div className="todo__count-by-status">
+                        <i className="fas fa-fire todo__count-by-status__icon" style ={{"color": 'red'}}></i>
+                        <div ref = {lateCountRef} key = {'open'+getNumberOfTasksForStatus('late', taskList)} className="todo__count-by-status__count">{getNumberOfTasksForStatus('late', taskList)}</div>
+                    </div>
+
+                    <div className="todo__count-by-status">
+                        <i className="far fa-check-circle todo__count-by-status__icon" style ={{"color": 'limegreen'}}></i>
+                        <div ref = {closeCountRef} key = {'open'+getNumberOfTasksForStatus('close', taskList)} className="todo__count-by-status__count">{getNumberOfTasksForStatus('close', taskList)}</div>
+                    </div> 
+                </div>               
                 
         </div>
     )

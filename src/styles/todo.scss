@@ -1,22 +1,47 @@
-@keyframes grow {
+@import "/src/styles/variables.scss";
+@import "/src/styles/mixins.scss";
+
+@keyframes enter-left {
     0% {
-        width: 0px;
+        margin-left: -100vw;
     }
     100% {
-        width:3vw;
+        margin-left: 2vw;
+    }
+
+}
+
+@keyframes enter-right {
+    0% {
+        margin-right: -100vw;
+    }
+    100% {
+        margin-right: 0;
     }
 }
 
-@keyframes shrink {
+@keyframes grow {
     0% {
-        width: 20%;
+        transform: scale(0);
     }
-    50% {
-        width:0%;
+    20% {
+        transform: scale(1.2);
     }
     100% {
-        width:20%;
+        transform: scale(1);
+        }
+}
+
+@keyframes grow-description {
+    0% {
+        transform: scale(1);
     }
+    20% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+        }
 }
 
 .todo {
@@ -32,10 +57,79 @@
     align-content: center;
     align-items:center;
     font-size: 2vw;
+    @include mobile-only {
+        padding-top:10vw;
+        width: 100%;
+        height:unset;
+        min-height: 100vh;
+        align-content:flex-start;
+    }
+
+    &__count-by-status {
+        padding: 0.2vw 0.2vw;
+        @include mobile-only {
+            height: 12vw;
+        }
+        &__container {
+            width: 100vw;   
+            /*background: linear-gradient(to bottom, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background-color:rgba(0, 0, 0, 0.829);
+            display:flex;
+            flex-direction:row;
+            justify-content: space-evenly;
+            align-items:center;
+            position:fixed;
+            top:0;
+            left:0;
+            z-index:95;
+            height: 5vw;
+            @include mobile-only{
+                height: 12vw;
+                background-color: rgba(32, 32, 32, 0.959);
+            }
+        }
+        &__icon{
+            font-size: 3vw;
+            text-shadow: 0.1vw 0.1vw 0.2vw white;
+            -webkit-text-stroke: 0.1vw white;
+            @include mobile-only {
+                font-size: 8vw;
+                margin-top:2vw;
+            }
+        }
+        &__count {
+
+            animation: 200ms ease-in forwards grow;
+            width: 2vw;
+            color: white;
+            margin-top: -2.2vw;
+            text-align:left;
+            background-color: rgba(0, 153, 255, 0.767);
+            border-radius: 2vw;
+            top: 0.7vw;
+            left: -1.3vw;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            box-shadow: 0.2vw 0.2vw 0.2vw black;
+            z-index:99;
+            position:relative;
+            font-size: 1vw;
+            border: 1px solid white;
+            @include mobile-only {
+                width: 5vw;
+                height: 5vw;
+                border-radius: 2.5vw;
+                top: -3vw;
+                left: -4vw;
+                font-size: 4vw;
+            }
+        }
+    }
     
     &__completion-message {
         width:100%;
-        padding: 1vw;
+        padding: 0.5vw;
         box-sizing:border-box;
         border-radius: 0.4vw;
         font-weight: bold;
@@ -47,8 +141,8 @@
 
    
     &__icon {
-        width: 15%;
-        margin: 0 5%;
+        width: 10%;
+        margin: 2vw 0vw;
         height: 4vw;
         font-size: 3vw;
         display:flex;
@@ -57,24 +151,20 @@
         justify-content:center;
         color: white;
         margin-bottom: 2vw;
+        @include mobile-only {
+            font-size: 10vw;
+            height: 15vw;
+            margin: 3vw;
+        }
     }
 
-    &__tasks {
-        display:flex;
-        width: 100%;
-        height: 40%;
-        flex-direction:row;
-        align-items:flex-start;
-        align-content:flex-start;
-        justify-content:space-evenly;
-        box-sizing:border-box;
-        flex-wrap:wrap;
-    }
+   
 
     &__task-details {
         width: 30%;
         padding: 0 2vw;
-        height: 100%;
+        margin-top: 4vw;
+        height: max-content;
         display:flex;
         flex-direction:row;
         flex-wrap:wrap;
@@ -82,35 +172,98 @@
         align-items: flex-start;
         align-content: flex-start;
         box-sizing: border-box;
+        @include mobile-only {
+            width: 100%;
+            height:100vh;
+            justify-content: center;
+            position: fixed;
+            margin-top:unset;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            background: rgb(28, 134, 255);
+            z-index:99;
+        }
+
+        &__deselect-task{
+            display:none;
+            @include mobile-only {
+                display:block;
+                position: fixed;
+                bottom:3vw;
+                display:flex;
+                flex-direction:row;
+                align-items:center;
+                justify-content:center;
+                font-size: 10vw;
+                width:100%;
+                border-radius: 5vw;
+                background-color:transparent;
+                border:none;
+                color:white;
+            }
+        }
 
         &__submit-description {
             width: 3vw;
             height:3vw;
             position: relative;
-            top: -26vw;
+            top: -53vh;
             left:-1.5vw;
             font-size: 2vw;
             border-radius: 50%;
+            border:none;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor: pointer;
+            @include mobile-only {
+                top: -5vw;
+                width: 10vw;
+                height: 10vw;
+                font-size: 7vw;
+                left:0;
+                
+            }
+            &:hover {
+                background-color:rgb(133, 255, 103);
+            }
         }
        
         &__title {
             min-width: 100%;
-            height: 4vw;
+            min-height: 4vh;
             display:flex;
             flex-direction:row;
             align-items:center;
-            justify-content:flex-start;
+            justify-content: flex-start;
             font-weight: bold;
-            font-size: 2vw;
+            font-size: 3vh;
             color: white;
             border-bottom: 0.1vw solid white;
-            margin: 0.5vw 0 2.5vw 0 ;
-            font-size: 1.5vw;
+            white-space:wrap;
+            overflow:hidden;
+            text-align:left;
+            margin: 4vw 0 2.5vw 0;
+            font-family: "Dancing Script";
+            @include mobile-only {
+                font-size: 8vw;
+                min-height: 10vw;
+                justify-content: center;
+                border-top: 0.1vw solid white;
+                justify-content: space-between;
+            }
+            & i{
+                margin-left: 1vw;
+            }
+            
+            
         }
         &__description {
             background-color: rgba(255, 255, 255, 0.198);
             margin-top: 4vw;
-            height: 50%;
+            height: 50vh;
             border-radius: 0.2vw;
             font-size: 2vw;
             padding: 2vw;
@@ -118,6 +271,13 @@
             font-family: "Dancing Script";
             width: 100%;
             color:white;
+            &--saved {
+                animation: 200ms ease-in forwards grow-description;
+            }
+            @include mobile-only {
+                font-size: 6vw;
+                height: 100vw;
+            }
         }
         &__information-container {
             width: 49%;
@@ -126,11 +286,15 @@
             flex-direction:row;
             align-items:center;
             justify-content:space-between;
-            background-color:rgba(255, 255, 255, 0.623);
+            background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             border-radius: 0.5vw;
             margin-right: 1%;
-
             padding-right: 0.5vw;
+            font-family: "Dancing Script";
+            @include mobile-only {
+                border-radius: 2vw;
+                height: 12vw;
+            }
             
         }
         &__deadline {
@@ -141,9 +305,16 @@
             justify-content:center;
             font-weight: bold;
             width: max-content;
+            @include mobile-only {
+                height: 12vw;
+                display:flex;
+                flex-direction:row;
+                align-items:center;
+                color:white;
+            }
+
         }
         &__status {
-            height: 10vh;
             font-size: 2vw;
             display:flex;
             flex-direction:row;
@@ -151,6 +322,11 @@
             justify-content:center;
             height:3vw;
             width: 7vw;
+           
+            @include mobile-only {
+                height: 20vw;
+                font-size: 6vw;
+            }
             
         }
         &__labels {
@@ -162,40 +338,92 @@
             background-color:rgb(80, 149, 214);
             height:4vw;
             width: 6vw;
-            border-radius: 0.5vw;
+            border-radius: 0.5vw 0 0 0.5vw;
             color:white;
             margin-right:  1vw;
             font-size: 1.5vw;
+            @include mobile-only {
+                height: max-content;
+                width: 18vw;
+                font-size: 4vw;
+                border-radius: 0 3vw 3vw 0;
+                box-shadow: 0.3vw 0.3vw 0.3vw grey;
+            }
         }
+    }
+
+    &__tasks {
+        display:flex;
+        width: 100vw;
+        height: 50vh;
+        flex-direction:row;
+        align-items:flex-start;
+        align-content:center;
+        justify-content:space-evenly;
+        box-sizing:border-box;
+        flex-wrap:wrap;
+        overflow-y:auto;
+        overflow-x:hidden;
+
+        @include mobile-only {
+            height: max-content;
+            padding-top: 5vh;
+            align-items:center;
+            align-content:center;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            &::-webkit-scrollbar{
+                display: none;
+              }
+            
+        }
+        
     }
     
     &__task {
         display:flex;
         flex-direction:row;
         height: 3vw;
-        width: max-content;
+        animation: 200ms ease-in forwards enter-right;
         border-radius: 0.3vw;
         margin-top: 1vw;
-        margin-left: 2vw;
-        background: rgba(255, 255, 255, 0.329);
+        margin: 1vw;
+        background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         display:flex;
         flex-direction:row;
         align-items:center;
         justify-content:flex-start;
+        box-shadow: 0.1vw 0.1vw 0.2vw rgba(255, 255, 255, 0.705);
+        font-family: "Dancing Script";
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+        &:nth-child(odd) {
+            animation: 300ms ease-out forwards enter-left;
+        }
 
         &:hover {
-            background-color:rgba(255, 255, 255, 0.507)
+            color:rgb(0, 29, 124);
+            transform:scale(1.05);
+
         }
+        @include mobile-only {
+            height: max-content;
+            flex-direction:column;
+            width: 45%;
+            justify-content: space-between;
+            border-radius:1vw;
+            margin-top: 4vw;
+
+
+            
+        }
+
         &--open {
-            color: rgb(255, 255, 255);
-            &:nth-child(odd) {
-                color:rgb(255, 255, 255);
-            }
+            color: rgb(85, 0, 119);
         }
         &--close {
-            color:rgb(255, 196, 0);
+            color:grey;
             opacity:0.9;
-            filter: grayscale(20%);
         }
 
         &__delete-icon {
@@ -211,22 +439,39 @@
             box-sizing:border-box;
             background-color:white;
             border-radius: 1vw;
+            transition: all .2s ease-in-out;
+            @include mobile-only {
+                font-size: 5vw;
+                width:6vw;
+                height: 6vw;
+                margin-top: -3vw;
+                border-radius:unset;
+                border-radius: 50%;
+            }
             &:hover {
                 color: red;
+                transform: scale(1.1);
             }
         }
     
         &__status {
             height:100%;
             width:3vw;
-            font-size: 1vw;
-            line-height: 1vw;
+            font-size: 1.3vw;
+            line-height: 1.3vw;
             box-sizing:border-box;
             display:flex;
             align-items:center;
             justify-content:center;
-            border-radius: 0.3vw;
-            opacity: 0.6;
+            border-radius:  0 0.3vw 0.3vw 0;
+            opacity: 0.9;
+            
+            @include mobile-only {
+                font-size: 5vw;
+                width: 100%;
+                padding: 1vw;
+                border-radius: 0 0 1vw 1vw;
+            }
             &--open {
                 background-color: rgba(204, 0, 255, 0.65);
                 & > i {
@@ -244,20 +489,57 @@
             width: max-content;
             white-space:nowrap;
             margin-right: 2vw;
+            font-size: 1.2vw;
+
+            @include mobile-only {
+                margin-right:unset;
+                width:100%;
+                height:100%;
+                font-size: 5vw;
+                word-break: normal;
+                white-space:unset;
+                padding: 1vw 2vw;
+            }
             
         }
         
     }
     &__title-input {
         width: 30%;
+        height: 3vw;
         font-size: 1.5vw;
-        margin-bottom: 1vw;
-        margin-right: 3Vw;
+        border-radius: 0.5vw;
+        border:none;
+        outline:none;
+        font-family: "Dancing Script";
+        @include mobile-only {
+            margin-left: 0vw;
+            font-size: 5vw;
+            width: 80vw;
+            height:max-content;
+            text-align:center;
+            margin-top: 5vw;
+        }
     }
     &__add-button {
+        height: 3vw;
         width: 30%;
+        border-radius: 0.5vw;
         font-size: 1.5vw;
-        margin-bottom: 1vw;
         font-family: "Dancing Script";
+        background-color:rgb(144, 14, 251);
+        color:white;
+        border:none;
+        cursor: pointer;
+        &:hover {
+            background-color: lighten(rgb(144, 14, 251), 10%);
+        }
+        @include mobile-only {
+            font-size: 5vw;
+            width:80vw;
+            margin-bottom: 10vw;
+            height: 6vw;
+            margin-left: 0vw;
+        }
     }
 }

@@ -1,8 +1,16 @@
+@import "/src/styles/variables.scss";
+@import "/src/styles/mixins.scss";
+
 .main-content {
     display: flex;
     flex-direction: row;
     flex-wrap:wrap;
     justify-content:space-evenly;
-    height:100vh;
+    height: 95vh;
     overflow-x:hidden;
+    overflow-y:hidden;
+    box-sizing:border-box;
+    @include mobile-only {
+        height: max-content;
+    }
 }

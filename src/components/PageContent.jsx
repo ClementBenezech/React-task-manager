@@ -9,11 +9,13 @@ import '../styles/mainContent.scss'
 const PageContent = (props) => {
 
         return (
-
-
+                    <React.Fragment>
+                            
                             <div className = "main-content">
                                     {props.children}
                             </div>
+                            <Footer/>
+                    </React.Fragment>
 
 
         )
