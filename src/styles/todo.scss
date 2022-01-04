@@ -182,7 +182,9 @@
             bottom:0;
             left:0;
             right:0;
-            background: rgb(28, 134, 255);
+           
+            background: linear-gradient(to bottom, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
             z-index:99;
         }
 
@@ -294,6 +296,7 @@
             @include mobile-only {
                 border-radius: 2vw;
                 height: 12vw;
+                background:unset;
             }
             
         }
@@ -344,9 +347,9 @@
             font-size: 1.5vw;
             @include mobile-only {
                 height: max-content;
-                width: 18vw;
+                width: 25vw;
                 font-size: 4vw;
-                border-radius: 0 3vw 3vw 0;
+                border-radius: 3vw 3vw 3vw 3vw;
                 box-shadow: 0.3vw 0.3vw 0.3vw grey;
             }
         }
