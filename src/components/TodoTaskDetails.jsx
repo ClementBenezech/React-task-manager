@@ -7,29 +7,42 @@ import { useState } from "react";
 import { useRef, useEffect } from "react";
 import {format} from 'date-fns'
 import { getTaskStyle } from "../utils/getTaskStyle";
-import { withTheme } from "@emotion/react";
+
+/*** This component takes no props and returns a Task card JSX element.
+ * It uses the state to identify and render the selected Task details.
+ * @return { JSX.Element }
+ */
 
 
 const TodoTaskDetails = () => {
 
+    // Declaring a useDispatch hook to interact with the reducer.
     const dispatch = useDispatch();
-    const inputRef = useRef()
+    
+    /* Declaring localStates: 
+    - a flag to indicate the description was just saved
+    - a "number of times content was saved" int value. Thiw will be used to generate a unique key for the description input*/
     const [descriptionHasBeenSaved, setDescriptionHasBeenSaved] = useState(false)
     const [numberOfSaves, setNumberOfSaves] = useState(0)
-    const statusIcons = [{status: "open", icon: "far fa-clock"}, {status: "close", icon: "far fa-check-circle"}  ]
+    // Setting up useSelector hooks to subscribe to store updates
     const currentTask = useSelector(state => state.selectedTask)
     const todoTasksList = useSelector(state => state.todoTasksList)
     const currentTaskContent = useSelector(state => state.todoTasksList.filter(task => task.id === parseInt(currentTask))[0])
-    /*const currentTaskContent = todoTasksList.filter(task => task.id === parseInt(currentTask))[0]*/
+   
+    // Declaring a Ref to be able to access the task description field in the dom and handle side effects
+    const inputRef = useRef()
+    // Declaring a local state to control the description text field.
     const [descriptionInputValue, setDescriptionInputValue] = useState(todoTasksList.filter(currentTaskContent !== undefined ? () => {return currentTaskContent.description} : () => {return ''}))
     
-    
+    // SIDE_EFFECT: Whenever the currentTaskContent changes, we update the description displayed by the dedicated input textarea.
     useEffect(()=> {
             if (currentTaskContent) {
             setDescriptionInputValue(currentTaskContent.description)
             }
     }, [currentTaskContent])
 
+    //SIDE_EFFECT: Whenever a new description has been saved, provide the user with some feedback from the UI.
+    //The Textarea will 'bump' to indicate the content has been saved.
     useEffect(() => {
         if (descriptionHasBeenSaved === true) {
             inputRef.current.classList.remove('todo__task-details__description--saved')
@@ -38,6 +51,7 @@ const TodoTaskDetails = () => {
         }
     },[descriptionHasBeenSaved])
 
+    //Only if there is there is a selected task with valid content in the state do we render content
     if (currentTaskContent !== undefined) {
         return <div className = "todo__task-details">
                 <div className = "todo__task-details__title">{currentTaskContent.title}</div>
@@ -71,12 +85,12 @@ const TodoTaskDetails = () => {
                      setDescriptionHasBeenSaved(true)
                 }}><i class="far fa-save"></i></button>
 
-                {/*<div className = "todo__completion-message">{todoTasksList.filter(element => element.status === "close").length + " Tasks completed out of " + todoTasksList.length}</div>*/}
                 <button className = 'todo__task-details__deselect-task' onClick = {(e)=> {
                     dispatch({type: 'todo/selectTask', payload: null})
                 }}><i class="far fa-times-circle"></i></button>
             </div>
     } else {
+        //Meaning, no selected task content was found
         return null
     }
 

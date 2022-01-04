@@ -2,6 +2,11 @@ import { useDispatch } from "react-redux";
 import { getTaskStyle } from "../utils/getTaskStyle";
 import { useSelector } from "react-redux";
 
+/*** This component takes a task as a props and returns a Task card JSX element.
+ * @param { Object } task
+ * @return { JSX.Element }
+ */
+
 const TodoTask = (props) => {
                 
                 const dispatch = useDispatch()
