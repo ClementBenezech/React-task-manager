@@ -24,8 +24,24 @@ import format from 'date-fns/format'
 
         //Adding new task
         case 'todo/addTask' : {
+            
+            const highestIdInArray = () => {
+
+                let highest = 0;
+                state.todoTasksList.forEach(task => {
+                    console.log(task.id);
+                    console.log(highest);
+                    if (parseInt(task.id) > highest) {
+                        highest = task.id
+                        console.log("greaterId is "+highest)
+                    }
+                })
+                return highest
+            }
+
             return produce(state, draft => {
-                draft.todoTasksList.push({'id': state.todoTasksList.length, 'title': action.payload, 'description': "You can add a description here, or set a Deadline for your task!", 'status': 'open', deadline: format(Date.now(), 'MM/dd/yyyy') })
+                
+                draft.todoTasksList.push({'id': highestIdInArray()+1, 'title': action.payload, 'description': "You can add a description here, or set a Deadline for your task!", 'status': 'open', deadline: format(Date.now(), 'MM/dd/yyyy') })
             })   
         }
 
@@ -43,8 +59,9 @@ import format from 'date-fns/format'
 
         //Delete task
         case 'todo/deleteTask' : {
-            
             return produce(state, draft => {
+                console.log("DELETETASK:"+action.payload)
+                console.log(state.todoTasksList.findIndex(task => task.id === parseInt(action.payload)))
                 draft.todoTasksList.splice(state.todoTasksList.findIndex(task => task.id === parseInt(action.payload)), 1)
             })   
         }

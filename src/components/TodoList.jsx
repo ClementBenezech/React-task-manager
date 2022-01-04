@@ -21,7 +21,7 @@ const TodoList = () => {
 
     const tasksReactElement = taskList.map(task => {
         return( 
-            <TodoTask key = {task.id} task = {task}/>
+            <TodoTask key = {task.id} task = {task.id}/>
         )
     })
 

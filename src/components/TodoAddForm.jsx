@@ -11,6 +11,7 @@ const TodoAddForm = (props) => {
 
     const handleSubmit = () => {
         if (taskInputValue !== '') {
+            console.log("the value of taskinputValue before creating = "+ taskInputValue)
             inputRef.current.value = ''
             setTaskInputValue('')
             dispatch({type: 'todo/addTask', payload: taskInputValue})

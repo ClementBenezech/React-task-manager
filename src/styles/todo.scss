@@ -230,11 +230,12 @@
             justify-content:center;
             cursor: pointer;
             @include mobile-only {
-                top: -5vw;
+                top: -105vw;
                 width: 10vw;
                 height: 10vw;
+                left:unset;
                 font-size: 7vw;
-                left:0;
+                right:-45vw;
                 
             }
             &:hover {
