@@ -21,7 +21,6 @@ const TodoTask = (props) => {
 
                                 <i title = {task.id} className="fas fa-minus-circle todo__task__delete-icon" onClick = {(e) => {
                                     e.stopPropagation();
-                                    console.log("TASK ID "+e.target.title)
                                     dispatch({type: 'todo/deleteTask', payload: e.target.title})
 
                                 }}></i>

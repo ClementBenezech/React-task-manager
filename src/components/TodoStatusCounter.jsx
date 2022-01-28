@@ -5,7 +5,6 @@ import { getNumberOfTasksForStatus } from "../utils/getNumberOfTasksForStatus"
  */
 
 const TodoStatusCounter = (props) => {
-    console.log(props)
     return (
                     <div className="todo__count-by-status">
                         <i className={props.icon+" todo__count-by-status__icon"} style ={{"color": props.color}}></i>
