@@ -10,7 +10,7 @@ export const getTaskStyle = (task) => {
     if (deadlineIsExpired === 1 && task.status === 'close') {
         return statusIcons.filter(icon => icon.status === task.status)[0]
     } else if (deadlineIsExpired === 1 && task.status === 'open')  {
-        return {icon: "fas fa-fire", color: "rgb(255, 83, 78)"}
+        return {icon: "fas fa-fire", color: "rgb(255, 83, 78)", status: "late"}
     } else {
         return statusIcons.filter(icon => icon.status === task.status)[0]
     }
