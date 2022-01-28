@@ -1,21 +1,43 @@
-# REACT APP BOILERPLATE
+# What is this app?
 
-Hi there,
+A few days ago, I took a technical test with multiple tasks, and one of them was to create a very very simple Todo App component, with one input to create new tasks, a button to add them, and the ability to toggle their className when they got clicked (Active/completed). The time was very limited and i got confused as I felt I had to use class components which was not natural to me, but I got most of it, and this process is still ongoing.
 
-So you came here after all! Nice :)
+Anyways, what started as "me wanting to write a clean version using hooks instead in a limited time" ended up as "Let's spend 3 days writing a complete responsive layout using a Redux store (Ok this might have been overkill for this project, but you never practice too much!)
 
-What is this repo? Well this is just my current BoilerPlate for any react based app with some level of complexity. 
 
-## How to install
+And I was actually surprised by two things:
 
-Just clone the repo, run " npm i ", and "npm start". That's it, the app is up. 
+    For most of it, I did not have major technical difficulties.
+    This was actually rather time consuming!
 
-## What you get
+I mean, "it's just a simple "todo app", right?
 
- - Redux and React-Redux, already setup, with Immer for easy state updates. A store is already set and provided to the APP
- - React-Router V6, with a <BrowserRouter> already created and wrapped around the app. Files for routes definitions already exist.
- - A <PageContent> component used to wrap any content with a header and a footer (Those two are already created too.)
- - A custom HOOK you can use, based on fetch, able to retrieve data from an API.
+Sure, but still, a lot of things are involved here:
+
+    React.
+    Redux for state management.
+    SASS for responsive styling.
+    Material UI for the datepicker (using fns-date)
+
+It also uses quite a lot of hooks to handle renders and side effects: useRef, useState, useSelector, useDispatch, useEffect...
+
+
+Of course this would have been faster if I actually thought I was going to build such an "evolved" version of my initial idea :) So there was a lot of changes in the layout as things evolved and content was added. The code has been refactored 2 times, setting out some business logic in separate JS files, breaking dow components into smaller units...
+
+I also commented it so you can go have a look on my github repository here:
+
+github.com/ClementBenezech/React-task-manager
+
+And a live build here:
+
+nice-task-tracker.netlify.app
+
+Feel free to give me some feedback, and I'll be happy to answer any questions :)
+
+#reactjs
+#redux
+#sass
+#reacthooks
 
 # Getting Started with Create React App
 
